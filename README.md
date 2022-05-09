@@ -77,17 +77,16 @@ const windowSizer = createWindowSizer({ store: persistantFileStore });
 ### Creating your own store
 
 ```ts
-import type { Rectangle } from 'electron';
-import { createWindowSizer } from 'electron-window-sizer';
+import { createWindowSizer, WindowStateOptions } from 'electron-window-sizer';
 
 import { persistantSettingsStore } from './helpers/settings';
 
 const windowSizer = createWindowSizer({
   store: {
-    get: async (): Promise<Rectangle> => {
+    get: async (): Promise<WindowStateOptions> => {
       return persistantSettingsStore.getSetting('window-size');
     },
-    set: async (data: Rectangle): Promise<void> => {
+    set: async (data: WindowStateOptions): Promise<void> => {
       return persistantSettingsStore.setSetting('window-size', data);
     },
   },
