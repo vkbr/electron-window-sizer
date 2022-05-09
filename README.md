@@ -33,12 +33,6 @@ function createWindow() {
     height: bounds?.height ?? 728,
     x: bounds?.x,
     y: bounds?.y,
-    icon: getAssetPath('icon.png'),
-    webPreferences: {
-      preload: app.isPackaged
-        ? path.join(__dirname, 'preload.js')
-        : path.join(__dirname, '../../.erb/dll/preload.js'),
-    },
   });
 
   windowSizer.watch(mainWindow); // Watch the window for change in bounds.
