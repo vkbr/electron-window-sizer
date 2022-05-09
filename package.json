@@ -1,0 +1,34 @@
+{
+  "name": "electron-window-sizer",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "rm -rf dist && tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.31",
+    "electron": "^18.2.0",
+    "typescript": "^4.6.4"
+  },
+  "peerDependencies": {
+    "electron": ">=18"
+  },
+  "author": {
+    "name": "Vkbr",
+    "url": "https://github.com/vkbr"
+  },
+  "bugs": {
+    "url": "https://github.com/vkbr/electron-window-sizer/issues"
+  },
+  "keywords": [
+    "electron",
+    "window-sizer",
+    "window manager",
+    "window position"
+  ],
+  "license": "MIT",
+  "description": "Persist your electron window position and size with ease."
+}
