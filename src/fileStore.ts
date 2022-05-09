@@ -1,11 +1,12 @@
 import { app } from 'electron';
 import { join } from 'path';
-import { readFile, writeFile } from 'fs/promises';
+import { readFile, writeFile, rm } from 'fs/promises';
 import { SettingsStore } from './types';
 
 export type CreateFileStoreOptions = {
   fileDir?: string;
   fileName?: string;
+  settingValidator?: (data: object) => boolean;
 };
 
 const DEFAULT_FILE_NAME = 'settings.json';
@@ -26,6 +27,14 @@ export function createFileStore<T extends object>(
       readFile(filePath)
         .then((data) => data.toString('utf-8'))
         .then((txt) => JSON.parse(txt))
+        .then((data) => {
+          if (!options.settingValidator?.(data) ?? false) {
+            return rm(filePath).finally(() => {
+              throw new Error('Invalid settings in file.');
+            });
+          }
+          return data;
+        })
         .catch((err) => {
           console.error(`Cannot read file ${filePath}: ${err}`);
           return null;

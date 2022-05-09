@@ -25,7 +25,7 @@ import { app } from 'electron';
 const windowSizer = createWindowSizer();
 
 function createWindow() {
-  const bounds = await windowSizer.getBounds(); // Read the existing window bounds
+  const { bounds, isMaximised } = await windowSizer.getState(); // Read the existing window bounds
 
   const mainWindow = new BrowserWindow({
     show: false,
@@ -33,6 +33,14 @@ function createWindow() {
     height: bounds?.height ?? 728,
     x: bounds?.x,
     y: bounds?.y,
+  });
+
+  mainWindow.on('ready-to-show', () => {
+    if (isMaximised) {
+      mainWindow.maximize();
+    } else {
+      mainWindow.show();
+    }
   });
 
   windowSizer.watch(mainWindow); // Watch the window for change in bounds.
