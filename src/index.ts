@@ -15,7 +15,6 @@ export type CreateWindowSizerOptions = {
 const getDefaultFileStore = () => {
   return createFileStore<WindowStateOptions>({
     settingValidator: (data: object) => {
-      console.log('settings validator', data);
       return !data || ('bounds' in data && 'isMaximized' in data);
     },
   });
